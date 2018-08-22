@@ -1,20 +1,24 @@
 'use strict'
 
 const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const app = express();
 const router = express.Router();
 
-const route = router.get('/', (req, res, next) => {
-    res.status(200).send({
-        title: 'Node API',
-        version: '0.0.1'
-    });
-});
+// conecta ao banco
+mongoose.connect('mongodb://flabio10:flabio10@ds020168.mlab.com:20168/nodecourse', { useNewUrlParser: true });
 
-const create = router.post('/', (req, res, next) => {
-    res.status(200).send();
-});
-app.use('/', route);
+// carrega rotas
+const indexRoute = require('./routes/index-route');
+const productRoute = require('./routes/product-route');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+
+
+app.use('/', indexRoute);
+app.use('/products', productRoute);
 
 module.exports = app;
