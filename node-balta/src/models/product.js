@@ -36,4 +36,4 @@ const schema = new Schema({
     }]
 });
 
-mondule.exports = moongose.model('Product', schema);
+module.exports = moongose.model('Product', schema);
