@@ -11,7 +11,7 @@ const schema = new Schema({
     },
     slug: {
         type: String,
-        required: true,
+        required: [true, 'slug é obrigatorio'], // exemplo de validação feita no model
         trim: true,
         index: true,
         unique: true
